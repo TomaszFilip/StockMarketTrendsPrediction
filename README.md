@@ -6,3 +6,6 @@ Yumo Xu and Shay B. Cohen. 2018. Stock Movement Prediction from Tweets and Histo
 
 With code downloaded from:
 https://github.com/yumoxu/stocknet-code
+
+And original dataset downloaded from:
+https://github.com/yumoxu/stocknet-dataset
