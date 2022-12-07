@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 import os
 import tensorflow as tf
+import tensorflow.compat.v1 as tf1
 import metrics as metrics
 import stat_logger as stat_logger
 from DataPipe import DataPipe
@@ -15,8 +16,8 @@ class Executor:
         self.skip_step = skip_step
         self.pipe = DataPipe()
 
-        self.saver = tf.train.Saver()
-        self.tf_config = tf.ConfigProto(allow_soft_placement=True)
+        self.saver = tf1.train.Saver()
+        self.tf_config = tf1.ConfigProto(allow_soft_placement=True)
         self.tf_config.gpu_options.allow_growth = True
 
     def unit_test_train(self):
@@ -109,9 +110,9 @@ class Executor:
         return results
 
     def train_and_dev(self):
-        with tf.Session(config=self.tf_config) as sess:
+        with tf1.Session(config=self.tf_config) as sess:
             # prep: writer and init
-            writer = tf.summary.FileWriter(self.model.tf_graph_path, sess.graph)
+            writer = tf1.summary.FileWriter(self.model.tf_graph_path, sess.graph)
 
             # init all vars with tables
             feed_table_init = {self.model.word_table_init: self.pipe.init_word_table()}

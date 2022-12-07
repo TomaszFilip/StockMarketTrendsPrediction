@@ -1,7 +1,7 @@
 #!/usr/local/bin/python
 import tensorflow as tf
 import math
-import tensorflow.contrib.distributions as ds
+import tensorflow.compat.v1.distributions as ds
 
 
 def bn(input, is_training_phase, bn_scope):
