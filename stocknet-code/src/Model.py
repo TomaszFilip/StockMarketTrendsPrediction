@@ -93,10 +93,19 @@ class Model:
         self.model_name = '_'.join(name_tuple)
 
         # paths
+        
         self.tf_graph_path = os.path.join(path_parser.graphs, self.model_name)  # summary
+        if not os.path.exists(self.tf_graph_path):
+            os.makedirs(self.tf_graph_path)
         self.tf_checkpoints_path = os.path.join(path_parser.checkpoints, self.model_name)  # checkpoints
+        if not os.path.exists(self.tf_checkpoints_path):
+            os.makedirs(self.tf_checkpoints_path)
         self.tf_checkpoint_file_path = os.path.join(self.tf_checkpoints_path, 'checkpoint')  # for restore
+        if not os.path.exists(self.tf_checkpoint_file_path):
+            os.makedirs(self.tf_checkpoint_file_path)
         self.tf_saver_path = os.path.join(self.tf_checkpoints_path, 'sess')  # for save
+        if not os.path.exists(self.tf_saver_path):
+            os.makedirs(self.tf_saver_path)
 
         # verification
         assert self.opt in ('sgd', 'adam')

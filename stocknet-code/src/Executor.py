@@ -116,16 +116,16 @@ class Executor:
 
             # init all vars with tables
             feed_table_init = {self.model.word_table_init: self.pipe.init_word_table()}
-            sess.run(tf.global_variables_initializer(), feed_dict=feed_table_init)
+            sess.run(tf1.global_variables_initializer(), feed_dict=feed_table_init)
             logger.info('Word table init: done!')
 
             # prep: checkpoint
             checkpoint = tf.train.get_checkpoint_state(os.path.dirname(self.model.tf_checkpoint_file_path))
             if checkpoint and checkpoint.model_checkpoint_path:
                 # restore partial saved vars
-                reader = tf.train.NewCheckpointReader(checkpoint.model_checkpoint_path)
+                reader = tf.compat.v1.train.NewCheckpointReader(checkpoint.model_checkpoint_path)
                 restore_dict = dict()
-                for v in tf.all_variables():
+                for v in tf.compat.v1.all_variables():
                     tensor_name = v.name.split(':')[0]
                     if reader.has_tensor(tensor_name):
                         print('has tensor: {0}'.format(tensor_name))
