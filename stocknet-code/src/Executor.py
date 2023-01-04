@@ -131,7 +131,7 @@ class Executor:
                         print('has tensor: {0}'.format(tensor_name))
                         restore_dict[tensor_name] = v
 
-                checkpoint_saver = tf.train.Saver(restore_dict)
+                checkpoint_saver = tf.compat.v1.train.Saver(restore_dict)
                 checkpoint_saver.restore(sess, checkpoint.model_checkpoint_path)
                 logger.info('Model: {0}, session restored!'.format(self.model.model_name))
             else:
